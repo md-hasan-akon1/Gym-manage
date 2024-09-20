@@ -1,6 +1,7 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Types } from 'mongoose';
 
 export interface ISchedule {
+    _id: Types.ObjectId;
     startDate: string;
     endDate: string;
     startTime: string;
