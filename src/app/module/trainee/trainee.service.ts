@@ -6,13 +6,14 @@ import { Booking } from "./trainee.model";
 import { User } from "../users/user.model";
 import mongoose from "mongoose";
 import { setErrorMap } from "zod";
+import { Request } from "express";
 
 const bookByTrainee = async (
   payload: { scheduleId?: string },
   user: JwtPayload
 ) => {
   const userExist = await User.isUserExists(user.email);
-  
+
   const schedule = await Schedule.findById({ _id: payload.scheduleId });
   if (!schedule) {
     throw new AppError(httpStatus.NOT_FOUND, "Schedule not found.");
@@ -51,20 +52,23 @@ const bookByTrainee = async (
 
     const updateTraineeCapacity = await Schedule.findByIdAndUpdate(
       { _id: payload.scheduleId },
-      { $inc: { traineeCount: 1 } }, 
+      { $inc: { traineeCount: 1 } },
       { new: true, session }
     );
-
-    
-    await session.commitTransaction()
-    await session.endSession()
+    await session.commitTransaction();
+    await session.endSession();
     return booking;
   } catch (error) {
-    session.abortTransaction()
-    session.endSession()
+    session.abortTransaction();
+    session.endSession();
   }
 };
 
+const cancelBooking = async (id: string) => {
+  const result = await Booking.deleteOne({ _id: id });
+  return result;
+};
 export const traineeService = {
   bookByTrainee,
+  cancelBooking,
 };
