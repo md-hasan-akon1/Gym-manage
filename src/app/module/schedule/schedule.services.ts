@@ -54,7 +54,7 @@ const createSchedule = async (payload: ISchedule) => {
                     }
                 }
             ]);
-            if (scheduleCount.length > 0&& scheduleCount[0].totalSchedules >= 5) {
+            if (scheduleCount.length > 0 && scheduleCount[0].totalSchedules >= 5) {
                throw new AppError (404,`Maximum of 5 schedules reached for ${format(currentDate, 'yyyy-MM-dd')}`);
             }
             const scheduleData = {
@@ -84,6 +84,7 @@ const createSchedule = async (payload: ISchedule) => {
 
     return schedules; // Return created schedules
 };
+
 
 export const scheduleService = {
     createSchedule

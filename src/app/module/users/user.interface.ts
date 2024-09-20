@@ -2,7 +2,7 @@ import { Model, Types } from "mongoose";
 import { USER_ROLE } from "./user.constance";
 
 // Define the User role type
-export type UserRole = "Admin" | "Trainer" | "Trainee";
+export type UserRole = "admin" | "trainer" | "trainee";
 
 // Define the User interface
 export interface IUser {

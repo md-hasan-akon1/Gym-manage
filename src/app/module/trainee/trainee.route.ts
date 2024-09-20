@@ -5,7 +5,7 @@ import { USER_ROLE } from "../users/user.constance";
 
 const router = express.Router();
 
-router.post("/",auth(USER_ROLE.Trainee) ,traineeController.bookByTrainee);
-router.delete("/cancel/:id",auth(USER_ROLE.Trainee) ,traineeController.cancelBooking);
+router.post("/",auth(USER_ROLE.trainee) ,traineeController.bookByTrainee);
+router.delete("/cancel/:id",auth(USER_ROLE.trainee) ,traineeController.cancelBooking);
 
 export const TraineeRoutes = router;
