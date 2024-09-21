@@ -52,7 +52,7 @@ const loginUser = async (payload: TLoginUser) => {
 };
 
 const getMe = async (payload: JwtPayload) => {
-  console.log(payload);
+  
   const result = await User.findOne(
     {
       email: payload.email,
@@ -72,6 +72,9 @@ const updateMyProfile = async (
 
   if(updateData.email){
     throw new AppError(httpStatus.NOT_ACCEPTABLE, "You con not change your email it is unique value");
+  }
+  if(updateData.role){
+    throw new AppError(httpStatus.NOT_ACCEPTABLE, "You con not change your role");
   }
   if(updateData.password){
     throw new AppError(httpStatus.NOT_ACCEPTABLE, "you cannot change you password. go to change password");

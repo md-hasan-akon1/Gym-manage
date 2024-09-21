@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AdminRouter = void 0;
+const express_1 = __importDefault(require("express"));
+const admin_controller_1 = require("./admin.controller");
+const user_constance_1 = require("./../users/user.constance");
+const auth_1 = __importDefault(require("./../../middlewares/auth"));
+const validateRequest_1 = __importDefault(require("../../middlewares/validateRequest"));
+const user_validation_1 = require("../users/user.validation");
+const router = express_1.default.Router();
+router.patch("/", (0, auth_1.default)(user_constance_1.USER_ROLE.admin), admin_controller_1.adminController.changeTrainerRole);
+router.get("/", (0, auth_1.default)(user_constance_1.USER_ROLE.admin), admin_controller_1.adminController.getAllTrainer);
+router.patch("/updateInfo/:id", (0, auth_1.default)(user_constance_1.USER_ROLE.admin), (0, validateRequest_1.default)(user_validation_1.updateUserValidationSchema), admin_controller_1.adminController.updateTrainerData);
+router.delete("/delete/:id", (0, auth_1.default)(user_constance_1.USER_ROLE.admin), admin_controller_1.adminController.deleteTrainer);
+router.post("/add-trainer", (0, auth_1.default)(user_constance_1.USER_ROLE.admin), (0, validateRequest_1.default)(user_validation_1.userValidationSchema), admin_controller_1.adminController.trainerCreateByAdmin);
+router.post("/trainer-assign", (0, auth_1.default)(user_constance_1.USER_ROLE.admin), admin_controller_1.adminController.assignedSchedule);
+exports.AdminRouter = router;

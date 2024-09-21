@@ -5,7 +5,7 @@ import * as argon2 from "argon2";
 const UserSchema: Schema<IUser, UserModel> = new Schema({
   name: {
     type: String,
-    required: true,
+   required: true,
   },
   email: {
     type: String,
