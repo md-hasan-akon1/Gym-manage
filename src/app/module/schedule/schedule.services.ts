@@ -86,6 +86,11 @@ const createSchedule = async (payload: ISchedule) => {
 };
 
 
+const getAllSchedule=async()=>{
+const schedule=await Schedule.find()
+return schedule
+}
 export const scheduleService = {
-    createSchedule
+    createSchedule,
+    getAllSchedule
 };

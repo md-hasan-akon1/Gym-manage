@@ -2,10 +2,13 @@
 Project Overview
 The Gym Class Scheduling and Membership Management System is designed to efficiently manage gym operations with three user roles: Admin, Trainer, and Trainee. Admins manage trainers, class schedules, and class assignments. Trainers conduct classes and view their schedules, while trainees book and manage their class schedules. The system enforces business rules such as limits on class sizes (maximum 10 trainees per class) and schedules (maximum 5 classes per day), and uses JWT for secure authentication.
 
-Live Hosting Link
-[Click here to view the live project]()
+## Live Hosting Link
+[Click here to view the live project](https://gym-manage.vercel.app)
 
-Relational Diagram
+## Post Man Documentation
+[Click here to view the live project](https://documenter.getpostman.com/view/27468363/2sAXqtagFw)
+
+## Relational Diagram
 
 [You can view the relational diagram here.](https://lucid.app/lucidchart/0f08e469-cc8a-4a0d-b74f-12d3caad7173/edit?viewport_loc=-85%2C-70%2C2109%2C918%2C0_0&invitationId=inv_d59b481e-1d2a-405b-9973-3097cdbc2773)
 
@@ -15,6 +18,12 @@ Web Framework: Express.js
 Database: MongoDB
 ORM/ODM: Mongoose
 Authentication: JWT (JSON Web Tokens)
+
+## Admin Credentials
+Email: hasan@gmail.com
+Password: 1111
+
+
 ## API Endpoints
 * Authentication
 * login
@@ -91,9 +100,7 @@ Body:{
   "message": "Class booked successfully",
   "Data": [response data here]
 }
-## Admin Credentials
-Email: hasan@gmail.com
-Password: 1111
+
 # Instructions to Run Locally
 Clone the Repository:
 

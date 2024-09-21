@@ -14,8 +14,19 @@ const  createSchedule= catchAsync(async (req: Request, res: Response) => {
         data: result
     });
 });
+const  getAllSchedule= catchAsync(async (req: Request, res: Response) => {
+    const result = await scheduleService.getAllSchedule();
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Schedule retrieved successfully!",
+        data: result
+    });
+});
 
 
 export const scheduleController = {
-    createSchedule
+    createSchedule,
+    getAllSchedule
 };

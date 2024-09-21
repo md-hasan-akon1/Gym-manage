@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const zod_1 = require("zod");
-const config_1 = __importDefault(require("../config"));
 const AppError_1 = __importDefault(require("../errors/AppError"));
 const handleDuplicateError_1 = __importDefault(require("../errors/handleDuplicateError"));
 const handleValidationError_1 = __importDefault(require("../errors/handleValidationError"));
@@ -68,8 +67,6 @@ const globalErrorHandler = (err, req, res, next) => {
         success: false,
         message,
         errorDetails,
-        err,
-        stack: config_1.default.nodeEnv === 'development' ? err === null || err === void 0 ? void 0 : err.stack : null,
     });
 };
 exports.default = globalErrorHandler;

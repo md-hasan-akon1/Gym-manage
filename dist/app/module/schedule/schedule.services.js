@@ -65,6 +65,11 @@ const createSchedule = (payload) => __awaiter(void 0, void 0, void 0, function* 
     }
     return schedules; // Return created schedules
 });
+const getAllSchedule = () => __awaiter(void 0, void 0, void 0, function* () {
+    const schedule = yield schedule_model_1.default.find();
+    return schedule;
+});
 exports.scheduleService = {
-    createSchedule
+    createSchedule,
+    getAllSchedule
 };
