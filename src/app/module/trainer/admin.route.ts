@@ -6,6 +6,7 @@ import auth from './../../middlewares/auth';
 const router=express.Router()
 
 router.patch("/",auth(USER_ROLE.admin),adminController.changeTrainerRole)
+router.get("/",auth(USER_ROLE.admin),adminController.getAllTrainer)
 router.patch("/updateInfo/:id",auth(USER_ROLE.admin),adminController.updateTrainerData)
 router.delete("/delete/:id",auth(USER_ROLE.admin),adminController.deleteTrainer)
 router.post("/add-trainer",auth(USER_ROLE.admin),adminController.trainerCreateByAdmin)

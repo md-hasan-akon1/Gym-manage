@@ -17,6 +17,18 @@ const changeTrainerRole = async (data: { userId: string; role: string }) => {
   return result;
 };
 const updateTrainerData = async (data: Partial<IUser>, id: string) => {
+  if (data.email) {
+    throw new AppError(
+      httpStatus.NOT_ACCEPTABLE,
+      "You con not change your email it is unique value"
+    );
+  }
+  if (data.password) {
+    throw new AppError(
+      httpStatus.NOT_ACCEPTABLE,
+      "you cannot change you password. go to change password"
+    );
+  }
   const user = await User.findOne({ _id: id, role: USER_ROLE.trainer });
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, "User not found!");
@@ -41,7 +53,13 @@ const deleteTrainer = async (id: string) => {
 };
 
 const trainerCreateByAdmin = async (userData: IUser) => {
-  const result = await User.create(userData);
+  const data = {
+    name: userData.name,
+    email: userData.email,
+    password: userData.password,
+    role: userData.role.toLowerCase(),
+  };
+  const result = await User.create(data);
   const { password, ...rest } = result.toObject();
   return rest;
 };
@@ -62,15 +80,24 @@ const assignedSchedule = async (data: {
     throw new AppError(httpStatus.NOT_FOUND, "User is  not a trainer !");
   }
 
-  const isExisting=await AssignedSchedule.findOne({
-    trainerId:data.trainerId,
-    scheduleId:data.scheduleId
-  })
-
-  if(isExisting){
-    throw new AppError(httpStatus.UNAUTHORIZED, "schedule already  created!");
+  const isExisting = await AssignedSchedule.findOne({
+    trainerId: data.trainerId,
+    scheduleId: data.scheduleId,
+  });
+  const isExist = await AssignedSchedule.findOne({
+    scheduleId: data.scheduleId,
+  });
+  if (isExisting || isExist) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "schedule already assign !");
   }
   const result = await AssignedSchedule.create(data);
+  return result;
+};
+const getAllTrainer = async () => {
+  const result = await User.find(
+    { role: USER_ROLE.trainer },
+    { password: false }
+  );
   return result;
 };
 
@@ -80,4 +107,5 @@ export const adminService = {
   deleteTrainer,
   trainerCreateByAdmin,
   assignedSchedule,
+  getAllTrainer,
 };

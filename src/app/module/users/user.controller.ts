@@ -35,8 +35,34 @@ const loginUser = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getMe = catchAsync(async (req, res) => {
+  const userData = await req.user;
+
+  const result = await userServices.getMe(userData);
+  
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "get my own Profile ",
+    data: result,
+  });
+});
+const updateMyProfile = catchAsync(async (req, res) => {
+  const userData = await req.user;
+
+  const result = await userServices.updateMyProfile(userData,req.body);
+  
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Update my own Profile successfully",
+    data: result,
+  });
+});
 
 export const userController = {
   createUser,
   loginUser,
+  getMe,
+  updateMyProfile
 };

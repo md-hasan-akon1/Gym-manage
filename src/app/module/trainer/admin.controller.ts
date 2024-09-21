@@ -61,6 +61,18 @@ const assignedSchedule = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getAllTrainer = catchAsync(async (req, res) => {
+  const Data = await req.body;
+
+  const result = await adminService.getAllTrainer();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "get all trainer successfully",
+    data: result,
+  });
+});
 
 export const adminController = {
   changeTrainerRole,
@@ -68,4 +80,5 @@ export const adminController = {
   trainerCreateByAdmin,
   deleteTrainer,
   assignedSchedule,
+  getAllTrainer
 };
